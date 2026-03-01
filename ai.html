@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <link rel="stylesheet" href="informat.css">
+<meta charset="UTF-8">
+<title>NextGen Devs</title>
+<link rel="icon" href="foto/icine.png">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background: #f0f2f5;
+}
+
+/* LEFT SIDE */
+.left {
+    width: 60%;
+    background: #1e1e2f;
+    color: white;
+    padding: 40px;
+}
+
+/* RIGHT SIDE CHAT */
+.right {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat {
+    width: 100%;
+    max-width: 400px;
+    height: 600px;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* MESSAGES */
+.messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.msg {
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.user {
+    background: #d4edda;
+    margin-left: auto;
+}
+
+.bot {
+    background: #e9ecef;
+}
+
+/* INPUT */
+.input-area {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 3px;
+}
+
+.send {
+    background: #28a745;
+    color: white;
+}
+
+.quick {
+    background: #6c757d;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="left">
+    <h1 id="center">NextGen Devs</h1>
+    <p>მარცხენა მხარე შეიძლება იყოს ნებისმიერი ინფორმაცია, ფოტოები, სტატისტიკა ან პროდუქტები</p>
+</div>
+
+<div class="right">
+    <div class="chat">
+
+        <div class="messages" id="messages"></div>
+
+        <div class="input-area">
+            <input type="text" id="input" placeholder="დაწერე რამე...">
+            <button class="send" onclick="sendMessage()">გაგზავნა</button>
+
+            <div>
+                <button class="quick" onclick="quick('გამარჯობა')">👋 გამარჯობა</button>
+                <button class="quick" onclick="quick('ერთ გვერდიანი საიტი')">ერთ გვერდიანი საიტი</button>
+                <button class="quick" onclick="quick('ფასი')">💰 ფასი</button>
+                <button class="quick" onclick="quick('საუკეთესო')">საუკეთესო</button>
+                <button class="quick" onclick="quick('ყიდვა')">ყიდვა</button>
+                <button class="quick" onclick="quick('მიწოდება')">საუკეთესო</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// 🛍️ პროდუქტები (მაგალითისთვის)
+let products = {
+    phone: {name:"📱 iPhone 13", price:"1500₾", contact:"599123456"},
+    laptop: {name:"💻 MacBook Air", price:"3200₾", contact:"599123456"},
+    headphones: {name:"🎧 AirPods", price:"400₾", contact:"599123456"}
+};
+
+// 💬 ზოგადი პასუხები
+function getReply(input) {
+    input = input.toLowerCase();
+
+    // 👋 Greeting
+    if(input.includes("გამარჯობა") || input.includes("hello")) {
+        return "👋 გამარჯობა! რით შემიძლია დაგეხმარო?";
+    }
+
+    // 🛒 ყიდვა
+    if(input.includes("ყიდვა") || input.includes("როგორ ვიყიდო")) {
+        return "🛒 შესაძენად მოგვწერე: 598215813 ან tiktok:nextgen devs";
+    }
+    // ფასი
+    if(input.includes("ფასი") ){
+        return "ფასები 50ლ-დან ზევით";
+    }
+
+    // 🚚 მიწოდება
+    if(input.includes("მიწოდება") || input.includes("delivery")) {
+        return "მიწოდება 1-2 დღეში";
+    }
+
+    // 📞 კონტაქტი
+    if(input.includes("კონტაქტი") || input.includes("დაკავშირება")) {
+        return "📞 598215813";
+    }
+
+    // 💰 ფასი ან კონკრეტული პროდუქტი
+    for(let key in products){
+        if(input.includes(key)){
+            let p = products[key];
+
+            if(input.includes("ფასი") || input.includes("ღირს")) {
+                return `💰 ${p.name} ღირს ${p.price}`;
+            }
+
+            return `${p.name}<br>💰 ${p.price}<br>📞 ${p.contact}`;
+        }
+    }
+
+    // ზოგადი AI-style fallback
+    if(input.includes("საუკეთესო")) {
+        return "🔥 საუკეთესო არჩევანი არის ერთ გვერდიანი საიტი";
+    }
+    if(input.includes("იაფი")) {
+        return "💸 ყველაზე იაფი პროდუქტი არის ერთ გვერდიანი საიტი (50₾)";
+    }
+    if(input.includes("ერთ გვერდიანი საიტი")) {
+        return "ერთ გვერდიანი საიტი ფასი(50₾) შესაძენად დაგვიკავშირდით:598215813 ან tiktok:nextgen devs.";
+    }
+
+    return "🤖 ბოდიშს გიხდით ვერ გავიგე. შეგიძლიათ დაგვიკავშირდეთ ტელეფონი:598215813 ან tiktok:nextgen devs.";
+}
+
+// 💬 მესიჯის დამატება
+function addMessage(text,type){
+    let msg=document.createElement("div");
+    msg.className="msg "+type;
+    msg.innerHTML=text;
+
+    document.getElementById("messages").appendChild(msg);
+    document.getElementById("messages").scrollTop=9999;
+}
+
+// 🚀 გაგზავნა
+function sendMessage(){
+    let input=document.getElementById("input");
+    let text=input.value;
+    if(text==="") return;
+
+    addMessage(text,"user");
+    let reply=getReply(text);
+    setTimeout(()=>{ addMessage(reply,"bot"); },300);
+    input.value="";
+}
+
+// ⚡ Quick buttons
+function quick(text){
+    document.getElementById("input").value=text;
+    sendMessage();
+}
+</script>
+
+</body>
+</html>
