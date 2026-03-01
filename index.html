@@ -1,11 +1,49 @@
 <!DOCTYPE html>
 <html lang="ka">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="informat.css">
 <meta charset="UTF-8">
 <title>NextGen Devs</title>
-<link rel="icon" href="foto/icine.png">
+<link rel="icon" href="">
 <style>
+
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;  /* Left და Right ქვემოთ მიდის */
+        min-height: auto;
+    }
+
+    .left, .right {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .chat {
+        width: 100%;
+        height: 400px;  /* მობილური ჩატისთვის იდეალური */
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    .left h1 {
+        font-size: 22px;
+    }
+    .left p {
+        font-size: 14px;
+    }
+
+    input, button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .quick {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -120,7 +158,7 @@ button {
                 <button class="quick" onclick="quick('ფასი')">💰 ფასი</button>
                 <button class="quick" onclick="quick('საუკეთესო')">საუკეთესო</button>
                 <button class="quick" onclick="quick('ყიდვა')">ყიდვა</button>
-                <button class="quick" onclick="quick('მიწოდება')">საუკეთესო</button>
+                <button class="quick" onclick="quick('მიწოდება')">მიწოდება</button>
             </div>
         </div>
 
