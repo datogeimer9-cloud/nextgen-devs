@@ -114,7 +114,7 @@ button {
         <div class="messages" id="messages"></div>
 
         <div class="input-area">
-            <input type="text" id="input" placeholder="დაწერე რამე...">
+            <input type="text" id="input" placeholder="ჰკითხე რაც გინდა...">
             <button class="send" onclick="sendMessage()">გაგზავნა</button>
 
             <div>
@@ -124,6 +124,9 @@ button {
                 <button class="quick" onclick="quick('საუკეთესო')">საუკეთესო</button>
                 <button class="quick" onclick="quick('ყიდვა')">ყიდვა</button>
                 <button class="quick" onclick="quick('მიწოდება')">მიწოდება</button>
+                <button class="quick" onclick="quick('კონტაქტი')">კონტაქტი</button>
+                <button class="quick" onclick="quick('შემოთავაზება')">შემოთავაზება</button>
+                <button class="quick" onclick="quick('დეტალური ინფორმაცია')">დეტალური ინფორმაცია</button>
             </div>
         </div>
 
@@ -131,12 +134,6 @@ button {
 </div>
 
 <script>
-// 🛍️ პროდუქტები (მაგალითისთვის)
-let products = {
-    phone: {name:"📱 iPhone 13", price:"1500₾", contact:"599123456"},
-    laptop: {name:"💻 MacBook Air", price:"3200₾", contact:"599123456"},
-    headphones: {name:"🎧 AirPods", price:"400₾", contact:"599123456"}
-};
 
 // 💬 ზოგადი პასუხები
 function getReply(input) {
@@ -145,6 +142,14 @@ function getReply(input) {
     // 👋 Greeting
     if(input.includes("გამარჯობა") || input.includes("hello")) {
         return "👋 გამარჯობა! რით შემიძლია დაგეხმარო?";
+    }
+
+    if(input.includes("დეტალური ინფორმაცია") || input.includes("hello")) {
+        return "დეტალური ინფორმაციისთვის დაგვიკავშირდით 571630508 ან tiktok:nextgen devs";
+    }
+
+    if(input.includes("შემოთავაზება") ) {
+        return "ჩვენ გთავაზობთ თანამედროვე სიტებს, ფასები იწყება 50ლ-დან თუ გინდა მოპასუხე ai-ს დამატება ფასი იმატებს 50ლ-ით და ცოტა დიდი დრო დასჭირდება.";
     }
 
     // 🛒 ყიდვა
@@ -166,18 +171,7 @@ function getReply(input) {
         return "📞 598215813";
     }
 
-    // 💰 ფასი ან კონკრეტული პროდუქტი
-    for(let key in products){
-        if(input.includes(key)){
-            let p = products[key];
-
-            if(input.includes("ფასი") || input.includes("ღირს")) {
-                return `💰 ${p.name} ღირს ${p.price}`;
-            }
-
-            return `${p.name}<br>💰 ${p.price}<br>📞 ${p.contact}`;
-        }
-    }
+    
 
     // ზოგადი AI-style fallback
     if(input.includes("საუკეთესო")) {
